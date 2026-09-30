@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="stand">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description"
+    content="Encyclopédie interactive de l'univers de JoJo's Bizarre Adventure : les 9 parties, 42 personnages, 36 Stands, un simulateur de duel, un quiz et un générateur de Stand." />
+  <title>JOJO pédia — Encyclopédie interactive JoJo's Bizarre Adventure</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Special+Elite&family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="decor" aria-hidden="true">
+    <div class="decor__halftone"></div>
+    <div class="decor__sun"></div>
+    <div class="decor__menacing" id="decorMenacing"></div>
+  </div>
+
+  <a class="skip-link" href="#main">Aller au contenu</a>
+
+  <header class="topbar">
+    <a class="brand" href="#/accueil">
+      <span class="brand__kanji">ジョジョ</span>
+      <span class="brand__text">JOJO<em>pédia</em></span>
+    </a>
+
+    <nav class="nav" id="nav" aria-label="Navigation principale">
+      <a href="#/accueil" data-view="accueil">Accueil</a>
+      <a href="#/parties" data-view="parties">Parties</a>
+      <a href="#/personnages" data-view="personnages">Personnages</a>
+      <a href="#/stands" data-view="stands">Stands</a>
+      <a href="#/duel" data-view="duel">Duel</a>
+      <a href="#/quiz" data-view="quiz">Quiz</a>
+      <a href="#/generateur" data-view="generateur">Générateur</a>
+    </nav>
+
+    <div class="topbar__actions">
+      <button class="btn btn--ghost btn--icone" id="sonToggle" type="button" aria-pressed="false"
+        aria-label="Activer les cris de combat" title="Cris de combat synthétisés (muets par défaut)">🔇</button>
+      <button class="btn btn--ghost" id="themeToggle" type="button" aria-pressed="false">☀️ Mode Hamon</button>
+      <button class="burger" id="burger" type="button" aria-label="Ouvrir le menu" aria-expanded="false">☰</button>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- ================= ACCUEIL ================= -->
+    <section class="view" id="view-accueil" aria-labelledby="titreAccueil">
+      <div class="hero">
+        <p class="hero__kicker">Encyclopédie interactive</p>
+        <h1 class="hero__title" id="titreAccueil">
+          <span class="hero__line">JOJO'S</span>
+          <span class="hero__line hero__line--alt">BIZARRE</span>
+          <span class="hero__line hero__line--out">ADVENTURE</span>
+        </h1>
+        <p class="hero__sub">
+          Neuf parties, une lignée maudite et bénie, des vampires, des Pillar Men, des Stands
+          aux noms de groupes de rock. Plonge dans l'univers d'Hirohiko Araki et explore-le
+          comme une carte au trésor.
+        </p>
+        <div class="hero__cta">
+          <a class="btn btn--primary" href="#/parties">Explorer les 9 parties</a>
+          <a class="btn" href="#/stands">Voir les Stands</a>
+          <a class="btn btn--ghost" href="#/quiz">Tester mes connaissances</a>
+        </div>
+        <p class="hero__note">Site de fan, non officiel · contenu informatif uniquement</p>
+      </div>
+
+      <div class="stats" id="statsAccueil"></div>
+
+      <h2 class="section-title"><span>ゴ</span> Par où commencer ?</h2>
+      <div class="starters">
+        <button class="starter" type="button" data-jump="parties">
+          <span class="starter__num">1</span>
+          <h3>La chronologie</h3>
+          <p>Les 9 parties, leur époque, leur JoJo, leur antagoniste et leur pouvoir — du Hamon au Spin.</p>
+        </button>
+        <button class="starter" type="button" data-jump="personnages">
+          <span class="starter__num">2</span>
+          <h3>Le casting</h3>
+          <p>Recherche live et filtre par partie dans une galerie de 42 personnages avec leurs fiches.</p>
+        </button>
+        <button class="starter" type="button" data-jump="stands">
+          <span class="starter__num">3</span>
+          <h3>Les Stands</h3>
+          <p>Les six paramètres officiels notés de A à E, le type de portée et la référence musicale.</p>
+        </button>
+        <button class="starter" type="button" data-jump="generateur">
+          <span class="starter__num">4</span>
+          <h3>Ton Stand</h3>
+          <p>Entre ton prénom et ta date de naissance : le générateur te fabrique un Stand sur mesure.</p>
+        </button>
+      </div>
+
+      <div class="duel" id="duel">
+        <h2 class="section-title"><span>ゴ</span> Le duel éternel</h2>
+        <p class="duel__text">Un seul de ces cris peut s'imposer. Lance le duel et regarde la pièce se remplir.</p>
+        <div class="duel__buttons">
+          <button class="btn btn--ora" id="btnOra" type="button">ORA ORA ORA !</button>
+          <button class="btn btn--muda" id="btnMuda" type="button">MUDA MUDA MUDA !</button>
+        </div>
+        <div class="duel__score">
+          <span>ORA : <b id="scoreOra">0</b></span>
+          <span class="duel__vs">vs</span>
+          <span>MUDA : <b id="scoreMuda">0</b></span>
+        </div>
+        <div class="duel__arena" id="duelArena"></div>
+      </div>
+    </section>
+
+    <!-- ================= PARTIES ================= -->
+    <section class="view" id="view-parties" aria-labelledby="titreParties" hidden>
+      <header class="page-head">
+        <p class="page-head__kicker">Chapitre 1</p>
+        <h1 id="titreParties">Les 9 parties</h1>
+        <p>De l'Angleterre victorienne à Hawaï : clique sur une carte pour ouvrir la fiche complète.</p>
+      </header>
+      <div class="timeline" id="timeline"></div>
+    </section>
+
+    <!-- ================= PERSONNAGES ================= -->
+    <section class="view" id="view-personnages" aria-labelledby="titrePersonnages" hidden>
+      <header class="page-head">
+        <p class="page-head__kicker">Chapitre 2</p>
+        <h1 id="titrePersonnages">Personnages</h1>
+        <p>Protagonistes, alliés, mentors et antagonistes — filtrables et cliquables.</p>
+      </header>
+
+      <div class="page-tools">
+        <button class="btn btn--ghost" id="persoAuHasard" type="button">🎲 Personnage au hasard</button>
+        <p class="collection" id="collectionPerso" aria-live="polite"></p>
+      </div>
+
+      <div class="filters">
+        <label class="search">
+          <span class="search__icon" aria-hidden="true">🔍</span>
+          <input type="search" id="recherchePerso" placeholder="Rechercher un nom, un Stand, un rôle…"
+            autocomplete="off" aria-label="Rechercher un personnage" />
+        </label>
+        <div class="chips" id="chipsParties" role="group" aria-label="Filtrer par partie"></div>
+      </div>
+      <p class="result-count" id="comptePerso"></p>
+      <div class="grid grid--perso" id="grillePersonnages"></div>
+      <p class="empty" id="videPerso" hidden>Aucun personnage ne correspond à cette recherche. ゴゴゴ</p>
+    </section>
+
+    <!-- ================= STANDS ================= -->
+    <section class="view" id="view-stands" aria-labelledby="titreStands" hidden>
+      <header class="page-head">
+        <p class="page-head__kicker">Chapitre 3</p>
+        <h1 id="titreStands">Stands</h1>
+        <p>
+          Un Stand est la matérialisation de l'esprit de son utilisateur. Chaque fiche reprend les
+          <b>six paramètres</b> notés de <b>A</b> à <b>E</b> et son type de portée.
+        </p>
+      </header>
+
+      <div class="page-tools">
+        <button class="btn btn--ghost" id="standAuHasard" type="button">🎲 Stand au hasard</button>
+        <p class="collection" id="collectionStands" aria-live="polite"></p>
+      </div>
+
+      <div class="filters">
+        <label class="search">
+          <span class="search__icon" aria-hidden="true">🔍</span>
+          <input type="search" id="rechercheStand" placeholder="Rechercher un Stand, un utilisateur, un pouvoir…"
+            autocomplete="off" aria-label="Rechercher un Stand" />
+        </label>
+        <div class="chips" id="chipsTypes" role="group" aria-label="Filtrer par type de Stand"></div>
+        <div class="chips" id="chipsPartiesStands" role="group" aria-label="Filtrer par partie"></div>
+      </div>
+      <p class="result-count" id="compteStands"></p>
+      <div class="grid grid--stands" id="grilleStands"></div>
+      <p class="empty" id="videStands" hidden>Aucun Stand ne correspond à ces filtres.</p>
+    </section>
+
+    <!-- ================= DUEL DE STANDS ================= -->
+    <section class="view" id="view-duel" aria-labelledby="titreDuel" hidden>
+      <header class="page-head">
+        <p class="page-head__kicker">Chapitre 4</p>
+        <h1 id="titreDuel">Stand Duel</h1>
+        <p>
+          Deux Stands, cinq phases, un seul vainqueur. Le simulateur est <b>déterministe</b> :
+          mêmes combattants = même combat, et inverser l'ordre des camps ne change pas l'issue.
+          Les grades A → E sont pondérés selon le type de portée, puis la mêlée décide.
+        </p>
+      </header>
+
+      <div class="sd-form">
+        <label class="field">
+          <span>Camp ORA</span>
+          <select id="duelSelectA" aria-label="Premier Stand"></select>
+        </label>
+        <label class="field">
+          <span>Camp MUDA</span>
+          <select id="duelSelectB" aria-label="Second Stand"></select>
+        </label>
+        <div class="sd-form__actions">
+          <button class="btn btn--primary" id="duelLancer" type="button">Lancer le duel</button>
+          <button class="btn btn--ghost" id="duelSurprise" type="button">Surprends-moi</button>
+          <button class="btn btn--ghost" id="duelJour" type="button">Duel du jour</button>
+          <button class="btn btn--ghost" id="duelEchanger" type="button">⇄ Échanger</button>
+        </div>
+      </div>
+
+      <p class="sd-hint">
+        Barème : chaque phase privilégie certains paramètres (la portée à distance, la puissance au
+        corps à corps, le potentiel au dernier souffle). Les fiches « hors échelle », sans grades,
+        partent d'une base C avec un avantage narratif.
+      </p>
+
+      <div class="sd-arena" id="duelTerrain" aria-live="polite"></div>
+    </section>
+
+    <!-- ================= QUIZ ================= -->
+    <section class="view" id="view-quiz" aria-labelledby="titreQuiz" hidden>
+      <header class="page-head">
+        <p class="page-head__kicker">Chapitre 5</p>
+        <h1 id="titreQuiz">Quiz ZA WARUDO</h1>
+        <p>Dix questions sur la saga. Ton meilleur score est sauvegardé dans ce navigateur.</p>
+      </header>
+      <div class="quiz-shell" id="quizShell"></div>
+    </section>
+
+    <!-- ================= GÉNÉRATEUR ================= -->
+    <section class="view" id="view-generateur" aria-labelledby="titreGenerateur" hidden>
+      <header class="page-head">
+        <p class="page-head__kicker">Chapitre 6</p>
+        <h1 id="titreGenerateur">Ton Stand personnel</h1>
+        <p>
+          Le générateur est <b>déterministe</b> : même prénom + même date = même Stand, à chaque fois.
+          Le nom, le type, le cri et le pouvoir sont dérivés de ta saisie (rien n'est envoyé en ligne).
+        </p>
+      </header>
+
+      <form class="generateur" id="formGenerateur" autocomplete="off">
+        <label class="field">
+          <span>Ton prénom (ou pseudo)</span>
+          <input type="text" id="genNom" name="nom" placeholder="Jotaro" required maxlength="40" />
+        </label>
+        <label class="field">
+          <span>Ta date de naissance</span>
+          <input type="date" id="genDate" name="date" required />
+        </label>
+        <div class="generateur__actions">
+          <button class="btn btn--primary" type="submit">Révéler mon Stand</button>
+          <button class="btn btn--ghost" type="reset">Réinitialiser</button>
+        </div>
+      </form>
+
+      <div id="carteStandGenere" class="gen-result" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer__inner">
+      <p>
+        <b>JOJO pédia</b> — fan-site d'information sur <i>JoJo's Bizarre Adventure</i> d'Hirohiko Araki.
+        Réalisé par un fan passionné de l'univers de JoJo's Bizarre Adventure
+      </p>
+      
+      <p class="footer__small">
+        Raccourcis : appuie sur <b>T</b> pour arrêter le temps.
+      </p>
+    </div>
+  </footer>
+
+  <div class="modal" id="modal" hidden>
+    <div class="modal__backdrop" data-close="modal"></div>
+    <div class="modal__panel" role="dialog" aria-modal="true" aria-labelledby="modalTitre">
+      <button class="modal__close" type="button" data-close="modal" aria-label="Fermer">✕</button>
+      <div class="modal__body" id="modalBody"></div>
+    </div>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/duel.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
