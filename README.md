@@ -133,3 +133,19 @@ Penser à supprimer `smoke.html` après le test.
   résultat du générateur et du quiz.
 - **Visuels** : uniquement des motifs CSS (halftone, dégradés, kanji) pour ne diffuser aucune
   image sous droits ; les citations sont des traductions approximatives à usage de fan.
+
+## Dépôt & publication
+
+Le projet est versionné sur GitHub : <https://github.com/rantiogouwale/jjbauniverse> (branche `main`).
+
+```bash
+git remote -v                     # origin → rantiogouwale/jjbauniverse
+git add -A && git commit -m "…"   # puis
+git push
+```
+
+Le site étant 100 % statique (aucun build, chemins relatifs), il peut être publié tel quel sur
+**GitHub Pages** : *Settings → Pages → Source « Deploy from a branch » → branche `main`, dossier
+`/ (root)`*. L'adresse devient <https://rantiogouwale.github.io/jjbauniverse/>. Aucun workflow
+n'est nécessaire : `index.html` est à la racine et toutes les ressources sont référencées en
+relatif (`css/`, `js/`).
